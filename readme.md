@@ -176,6 +176,12 @@ Upload and process PDF documents.
     "total_chunks": 150
   }
   ```
+  ```
+  {
+  curl -X POST "http://localhost:8000/documents" \
+  -F "files=@arquivo.pdf;type=application/pdf"
+  }
+  ```
 
 ### `POST /question`
 Ask a question about the uploaded documents.
@@ -190,6 +196,14 @@ Ask a question about the uploaded documents.
   {
     "answer": "Report any damage immediately to the commercial carrier that delivered the motor.",
     "references": ["Source text chunk 1", "Source text chunk 2"]
+  }
+  ```
+  ```
+    {
+   curl -X POST "http://localhost:8000/question" \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Qual é a capital da Alemanha?"}'
+
   }
   ```
 
@@ -240,4 +254,5 @@ Ask a question about the uploaded documents.
 - FAISS for vector similarity search
 
 - Sentence Transformers for text embeddings
+
 
