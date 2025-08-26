@@ -1,0 +1,32 @@
+# Framework Web
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+
+# Configuração
+python-dotenv==1.1.1
+
+# Processamento de PDF
+pypdf==6.0.0
+
+# NumPy (versão compatível com todo o ecossistema)
+numpy==1.26.4
+
+# Embeddings e Vetores
+sentence-transformers==3.0.1
+faiss-cpu==1.8.0
+
+# LLM e IA
+langchain==0.3.0
+langchain-google-genai==2.1.5
+
+# Testes
+pytest==8.4.1
+pytest-asyncio==0.24.0
+
+# Upload de arquivos
+python-multipart==0.0.20
+
+# Interface
+streamlit==1.48.1
+pandas==2.1.4
+plotly==5.9.0

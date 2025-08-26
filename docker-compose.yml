@@ -1,0 +1,101 @@
+# =============================================================================
+# RAG System Docker Compose Configuration
+# =============================================================================
+# This file defines and orchestrates all services for the RAG System:
+# - api: FastAPI backend service
+# - streamlit: Streamlit frontend interface
+#
+# Commands:
+#   docker-compose up -d     # Start all services
+#   docker-compose down      # Stop all services
+#   docker-compose logs -f   # View logs
+#   docker-compose ps        # Check status
+# =============================================================================
+
+services:
+  # FastAPI Backend Service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: rag-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Application Configuration
+      - APP_NAME=${APP_NAME}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - DEBUG=${DEBUG}
+      
+      # Logging Configuration
+      - LOG_LEVEL=${LOG_LEVEL}
+      
+      # Vector Database Configuration
+      - VECTOR_DB_PATH=/app/vector_db
+      
+      # Embedding Model Configuration
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      
+      # LLM Provider Configuration
+      - LLM_PROVIDER=${LLM_PROVIDER}
+      
+      # Google Gemini Configuration
+      - LLM_MODEL=${LLM_MODEL}
+      - LLM_API_KEY=${LLM_API_KEY}
+      
+      # Document Processing Configuration
+      - CHUNK_SIZE=${CHUNK_SIZE}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP}
+    
+    volumes:
+      # Persist vector database
+      - ./vector_db:/app/vector_db
+      
+      # Persist logs
+      - ./logs:/app/logs
+      
+      # Mount test files
+      - ./tests:/app/tests:ro
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    networks:
+      - rag-network
+
+  # Streamlit Frontend Service
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: rag-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      # API URL (uses service name from docker-compose)
+      - API_BASE_URL=http://api:8000/api
+    
+    depends_on:
+      api:
+        condition: service_healthy
+    
+    restart: unless-stopped
+    
+    networks:
+      - rag-network
+
+# Network configuration
+networks:
+  rag-network:
+    driver: bridge
+
+# Volume definitions
+volumes:
+  rag-logs:
+  rag-vector-db:
