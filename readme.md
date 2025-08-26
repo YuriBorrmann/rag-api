@@ -17,7 +17,7 @@ A comprehensive Retrieval-Augmented Generation (RAG) system that allows users to
 
 This diagram illustrates the flow of how a user query is processed. The query is embedded into a vector, searched within the FAISS vector database, and relevant text chunks are retrieved. These chunks, along with the original query, are then passed to the LLM to generate a final answer.
 
-<p align="center"> <img src="files/diagram_1.png" alt="Question Answering Flow" width="700"/> </p>
+<p align="center"> <img src="files/diagram_2.png" alt="Question Answering Flow" width="700"/> </p>
 
 Figure 1: Flow of processing a user query through embedding, FAISS retrieval, and LLM answer generation.
 
@@ -25,7 +25,7 @@ Figure 1: Flow of processing a user query through embedding, FAISS retrieval, an
 
 This diagram shows the pipeline of how a document upload is handled. The file is temporarily stored, its text is extracted, split into chunks, and then embedded into vectors. These embeddings are indexed in FAISS, creating the vector database used for retrieval during queries.
 
-<p align="center"> <img src="files/diagram_2.png" alt="Document Ingestion Flow" width="700"/> </p>
+<p align="center"> <img src="files/diagram_1.png" alt="Document Ingestion Flow" width="700"/> </p>
 
 Figure 2: Steps of document ingestion, from upload to vector database indexing.
 
@@ -272,4 +272,5 @@ Ask a question about the uploaded documents.
 - Streamlit for the user interface
 - Google Gemini for language model services
 - FAISS for vector similarity search
+
 - Sentence Transformers for text embeddings
