@@ -29,40 +29,6 @@ This diagram shows the pipeline of how a document upload is handled. The file is
 
 Figure 2: Steps of document ingestion, from upload to vector database indexing.
 
-## Project Structure
-
-```
-rag_system/
-├── .env                 # Environment variables
-├── .gitignore           # Git ignore rules
-├── app/                 # Core application code
-│   ├── api/             # API endpoints and schemas
-│   │   ├── __init__.py
-│   │   ├── routes.py    # FastAPI route definitions
-│   │   └── schemas.py   # Pydantic models for request/response
-│   ├── core/            # Core utilities
-│   │   ├── __init__.py
-│   │   ├── config.py    # Configuration management
-│   │   └── logger.py    # Logging configuration
-│   └── services/        # Business logic services
-│       ├── __init__.py
-│       ├── document_processor.py  # PDF text extraction and chunking
-│       ├── embedding_service.py   # Vector embeddings and FAISS index
-│       ├── retrieval_service.py    # Similarity search
-│       └── llm_service.py          # Language model integration
-├── logs/                # Application logs
-├── vector_db/           # Vector database storage
-├── files/               # Test files
-│   └── LB5001.pdf       # Sample test document
-│   └── diagram_1.png    # Diagram 1
-│   └── diagram_2.png    # Diagram 2
-├── main.py              # FastAPI application entry point
-├── test_rag.py          # Test script for validation
-├── app_streamlit.py     # Streamlit UI application
-├── requirements.txt     # Python dependencies
-└── README.md            # This file
-```
-
 ## Prerequisites
 
 - Python 3.8 or higher
@@ -73,7 +39,7 @@ rag_system/
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/YuriBorrmann/rag-api
    cd rag_system
    ```
 
@@ -155,7 +121,7 @@ You can also run tests directly from the Streamlit interface:
 3. Click "Run Validation Tests"
 4. View the results in the interface
 
-## Usage Guide
+## Usage Guide - Streamlit Interface
 
 ### 1. Document Upload
 - Navigate to the "Document Upload" page
@@ -274,3 +240,4 @@ Ask a question about the uploaded documents.
 - FAISS for vector similarity search
 
 - Sentence Transformers for text embeddings
+
